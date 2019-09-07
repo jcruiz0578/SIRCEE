@@ -34,11 +34,11 @@ class IngresosController extends Controller
      */
     public function index(Request $request)
     {
-        /* 
-        $request->session()->forget('success');  // borra la sesion flash de mensajes 
+        /*
+        $request->session()->forget('success');  // borra la sesion flash de mensajes
         $request->session()->forget('error'); */
 
-        $periodoescolar = $value = session()->get('periodoescolar'); // almacena la variable de sesssion 
+        $periodoescolar = $value = session()->get('periodoescolar'); // almacena la variable de sesssion
 
         $users = Ingreso::join('estudiantes', 'estudiantes.cedulaest', '=', 'ingresos.cedulaest')
             ->select('estudiantes.apellidosest', 'estudiantes.nombresest', 'estudiantes.sexoest', 'ingresos.id_ingreso', 'ingresos.periodoescolar', 'ingresos.cedulaest', 'ingresos.anoest', 'ingresos.seccion', 'ingresos.status')
@@ -94,7 +94,7 @@ class IngresosController extends Controller
 
         if (is_null($estudiantes)) {
             $estudiantes = new Estudiante();
-            // $estudiantes->create ( $request->all () );   
+            // $estudiantes->create ( $request->all () );
 
             $estudiantes->create(array_merge($request->all(), ['telefonosest' => $telefonosest]));
         } else {
@@ -118,7 +118,7 @@ class IngresosController extends Controller
         }
 
 
-        $users = new Ingreso();  // inicializar el modelo  Ingreso 
+        $users = new Ingreso();  // inicializar el modelo  Ingreso
 
         $periodoescolar = session()->get('periodoescolar');
         $condicionest = $request->input('condicionest');
@@ -281,7 +281,7 @@ class IngresosController extends Controller
 
 
 
-   $mensaje = "mostrar";
+        $mensaje = "mostrar";
 
         //Session::flash('success', 'La Cedula   ' . $request->busqueda . '    Esta Registrada');
         Session::flash('message', 'El Registro fue Ingresado con Exito');
@@ -491,7 +491,7 @@ class IngresosController extends Controller
     {
         $id = $id_ingreso;
         $cedula = $cedulaest;
-        $periodoescolar = $value = session()->get('periodoescolar'); // almacena la variable de sesssion 
+        $periodoescolar = $value = session()->get('periodoescolar'); // almacena la variable de sesssion
         $mensaje = $mensaje;
 
         $users = Ingreso::where('id_ingreso', '=', $id)->get();
@@ -731,39 +731,54 @@ class IngresosController extends Controller
 
         if ($request->ajax()) {
 
+
             $periodoescolar = $value = session()->get('periodoescolar');
             $cedulaest = $request->input('cedulaest');
 
-            /*   $c = Ingreso::join('estudiantes', 'estudiantes.cedulaest', '=', 'ingresos.cedulaest')
-                ->select('estudiantes.apellidosest', 'estudiantes.nombresest', 'estudiantes.sexoest', 'ingresos.id_ingreso', 'ingresos.periodoescolar', 'ingresos.cedulaest', 'ingresos.anoest', 'ingresos.seccion', 'ingresos.status')
-                ->where('ingresos.cedulaest', '=', $cedulaest)
-                ->where('periodoescolar', '=', $periodoescolar)
-                ->get()->first(); */
+            $estudiantes = Ingreso::where('cedulaest', '=', $cedulaest)->get();
 
 
-            $c = Ingreso::with('Estudiante')
-                ->where('ingresos.cedulaest', '=', $cedulaest)
-                ->where('periodoescolar', '=', $periodoescolar)
-                ->get()->first();
+            if (count($estudiantes) > 0) {
+                $validar = "SI";
 
 
-            $apellidosest = $c->estudiante->apellidosest;
-            $nombresest =  $c->estudiante->nombresest;
-            $sexoest = $c->estudiante->sexoest;
-            $anoest = $c->anoest;
-            $seccion = $c->seccion;
-
-            // return $c;
-
-            return response()->json([
-                'apellidosest' => $apellidosest,
-                'nombresest' => $nombresest,
-                'sexoest' => $sexoest,
-                'anoest' => $anoest,
-                'seccion' => $seccion,
+                $c = Ingreso::with('Estudiante')
+                    ->where('ingresos.cedulaest', '=', $cedulaest)
+                    ->where('periodoescolar', '=', $periodoescolar)
+                    ->first();
 
 
-            ]);
+
+
+                $apellidosest = $c->estudiante->apellidosest;
+                $nombresest =  $c->estudiante->nombresest;
+                $sexoest = $c->estudiante->sexoest;
+                $anoest = $c->anoest;
+                $seccion = $c->seccion;
+                $status = $c->status;
+
+
+                return response()->json([
+                    'apellidosest' => $apellidosest,
+                    'nombresest' => $nombresest,
+                    'sexoest' => $sexoest,
+                    'anoest' => $anoest,
+                    'seccion' => $seccion,
+                    'status' => $status,
+                    'validar' => $validar,
+
+
+                ]);
+            } else {
+                $validar = "NO";
+
+                return response()->json([
+
+                    'validar' => $validar,
+
+
+                ]);
+            }
         }
     }
 }

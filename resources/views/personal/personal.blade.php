@@ -46,9 +46,9 @@
     <div class="row  justify-content-center  pb-4">
         <div class="col-md-9">
             <div class="card text-left ">
-                <form  id="form1">
+                <form>
                     <div class="card-header  text-white bg-primary ml-3 mr-4" style="box-shadow: 15px 15px 15px #999;">
-                        <h3 class="card-title font-weight-bold">Constancia de Estudios</h3>
+                        <h3 class="card-title font-weight-bold">Registro de Personal </h3>
                     </div>
 
 
@@ -119,19 +119,8 @@
                             <div class="form-group col-md-2">
 
                                 {!! Form::label('seccion', 'Sección:', ['for' => 'seccion'] ) !!}
-                                {!! Form::text('seccion', null, ['class' => 'form-control formato  text-center', 'id' =>
+                                {!! Form::text('seccion', null, ['class' => 'form-control formato', 'id' =>
                                 'seccion','onKeyUp' =>
-                                'this.value = this.value.toUpperCase()', 'placeholder' => '', 'value' => ''
-                                ] )
-                                !!}
-                            </div>
-
-
-                             <div class="form-group col-md-2">
-
-                                {!! Form::label('status', 'status:', ['for' => 'status'] ) !!}
-                                {!! Form::text('status', null, ['class' => 'form-control formato text-center', 'id' =>
-                                'status','onKeyUp' =>
                                 'this.value = this.value.toUpperCase()', 'placeholder' => '', 'value' => ''
                                 ] )
                                 !!}
@@ -145,20 +134,20 @@
                     </div>
                     <div class="card-footer ">
 
-                        <div   class="form-row  justify-content-center">
-                            <div id="ce1" class="form-group col-md-5"  style="display:none">
+                        <div class="form-row  ">
+                            <div class="form-group col-md-5">
                                 <button id="ce" class="btn btn-primary  form-control font-weight-bold"
                                     style="font-size: 1.2rem">Costancia</button>
                             </div>
 
 
-                            <div id="autenticacion1" class="form-group col-md-4" style="display:none">
+                            <div class="form-group col-md-4">
                                 <button id="autenticacion" class="btn btn-success  form-control font-weight-bold"
                                     style="font-size: 1.2rem">Autenticación</button>
                             </div>
 
                             <div class="form-group col-md-3">
-                                <button   id="reset" type="reset" class="btn btn-light  form-control font-weight-bold"
+                                <button type="reset" class="btn btn-light  form-control font-weight-bold"
                                     style="font-size: 1.2rem">Limpiar</button>
                             </div>
 

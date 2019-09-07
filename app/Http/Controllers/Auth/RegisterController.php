@@ -55,7 +55,7 @@ class RegisterController extends Controller
             'categoria' => 'required',
             'status' => 'required',
             'email' => 'required|email|max:255|',
-            
+
         ]);
     }
 
@@ -74,7 +74,7 @@ class RegisterController extends Controller
             'categoria' => $data['categoria'],
             'status' => $data['status'],
             'email' => $data['email'],
-            
+
         ]);
     }
 }
