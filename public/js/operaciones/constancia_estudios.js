@@ -82,6 +82,8 @@ $("#ce").on("click", function(e) {
         return false;
     }
 
+
+
     document.getElementById("cedulaest").disabled = false;
     document.getElementById("apellidosest").disabled = false;
     document.getElementById("nombresest").disabled = false;
@@ -118,5 +120,5 @@ $("#reset").on("click", function() {
     document.getElementById("status").disabled = false;
 
     document.getElementById("ce1").style.display = "none";
-    document.getElementById("autenticacion1").style.display = "none";
+    
 });

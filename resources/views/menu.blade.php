@@ -35,7 +35,7 @@
                     <a class="dropdown-item" href="{{url('/home')}}">Consulta</a>
                     <a class="dropdown-item" href="{{url('ingresos/consultar_secciones')}}">Asignación de Sección</a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">Calificaciones</a>
+                    <a class="dropdown-item" href="{{url('calificaciones/llenar')}}">Calificaciones</a>
                 </div>
             </li>
             <li class="nav-item dropdown">

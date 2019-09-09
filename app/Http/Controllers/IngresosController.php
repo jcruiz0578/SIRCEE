@@ -781,4 +781,42 @@ class IngresosController extends Controller
             }
         }
     }
+
+
+public function calificaciones_consulta(Request $request)
+    {
+
+        // si la peticion es ajax
+    
+            $periodoescolar = $value = session()->get('periodoescolar');
+
+  $anoest = $request->input('anoest');
+   $seccion = $request->input('seccion');
+   
+
+
+
+            $users = Ingreso::join('estudiantes', 'estudiantes.cedulaest', '=', 'ingresos.cedulaest')
+                ->select('estudiantes.apellidosest', 'estudiantes.nombresest', 'estudiantes.sexoest', 'estudiantes.fnest',   'ingresos.id_ingreso', 'ingresos.periodoescolar', 'ingresos.cedulaest', 'ingresos.anoest', 'ingresos.seccion', 'ingresos.status')
+                ->where('periodoescolar', '=', $periodoescolar)
+                 ->where('anoest', '=', $anoest)
+                 ->where('seccion', '=', $seccion)
+                ->orderBy('anoest', 'asc')
+                ->orderBy('fnest', 'desc')
+                ->get();
+
+
+             return Datatables::of($users)
+                ->addColumn('nota', '<input type="text" id="nota[]" name="nota[]" style="width: 60px; text-align: center" max="20">')
+                 ->rawColumns(['nota'])
+                 ->make(true);
+        
+
+    }
+
+
+
+
+
+
 }

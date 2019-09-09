@@ -78,6 +78,14 @@ Route::group(['middleware' => 'auth'], function () {
 
     // RUTAS PARA REPORTES PDF
     Route::get('reportes/constancia_estudio/{cedulaest}', ['as' => 'reportes.constancia_estudio', 'uses' => 'PdfController@constancia_estudio']);
+
+
+
+
+Route::view('calificaciones/llenar', 'calificaciones/calificaciones_llenado');
+Route::get('calificaciones_consulta', ['as' => 'calificaciones.consulta', 'uses' => 'IngresosController@calificaciones_consulta']);
+
+
 });
 
 
