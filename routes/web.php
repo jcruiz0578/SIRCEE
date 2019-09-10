@@ -85,6 +85,8 @@ Route::group(['middleware' => 'auth'], function () {
 Route::view('calificaciones/llenar', 'calificaciones/calificaciones_llenado');
 Route::get('calificaciones_consulta', ['as' => 'calificaciones.consulta', 'uses' => 'IngresosController@calificaciones_consulta']);
 
+Route::get('calificaciones/registrar', ['as' => 'calificaciones.registrar', 'uses' => 'IngresosController@calificaciones_registrar']);
+
 
 });
 

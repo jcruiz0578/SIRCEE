@@ -13,6 +13,8 @@ use App\Vivienda;
 use App\Documento;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Institucion;
+use App\Calificacion;
+
 use Illuminate\Http\Request;
 //use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
@@ -801,19 +803,79 @@ public function calificaciones_consulta(Request $request)
                 ->where('periodoescolar', '=', $periodoescolar)
                  ->where('anoest', '=', $anoest)
                  ->where('seccion', '=', $seccion)
-                ->orderBy('anoest', 'asc')
-                ->orderBy('fnest', 'desc')
+                ->orderBy('cedulaest', 'desc')
+                 ->orderBy('fnest', 'desc')
                 ->get();
 
 
+
+
              return Datatables::of($users)
+
+->addColumn('id_ingreso', '<input type="text" id="id_ingreso[]" name="id_ingreso[]" class="form-control  text-center  " value="{{$id_ingreso}}"  disabled>')
+
                 ->addColumn('nota', '<input type="text" id="nota[]" name="nota[]" style="width: 60px; text-align: center" max="20">')
-                 ->rawColumns(['nota'])
+                 ->rawColumns(['nota', 'id_ingreso'])
                  ->make(true);
         
 
     }
 
+
+
+public function calificaciones_registrar(Request $request)
+    {
+
+      $periodoescolar = $value = session()->get('periodoescolar');
+
+      $id_ingreso = $request->input('id_ingreso');
+      $lapso = $request->input('lapso');
+      $anoest = $request->input('anoest');
+      $seccion = $request->input('seccion');
+       $materias = $request->input('materias');
+      $nota = $request->input('nota');
+
+
+
+for($i    = 0; $i<count($id_ingreso) ; $i++)
+{
+
+$calificaciones = new Calificacion();
+
+
+            $calificaciones->id_ingreso = $id_ingreso[$i];
+            $calificaciones->periodoescolar = $periodoescolar;
+            $calificaciones->lapso = $lapso;
+            $calificaciones->anoest = $anoest;
+            $calificaciones->seccion = $seccion;
+            $calificaciones->$materias = $nota[$i];
+          
+             $calificaciones->save();
+
+}
+
+
+
+
+
+
+
+ return response()->json([
+
+             'id_ingreso' => $id_ingreso,
+             'periodoescolar' => $periodoescolar,
+             'lapso' => $lapso,
+             'anoest' => $anoest,
+             'seccion' => $seccion,
+             'nota' => $nota,
+
+
+        ]);
+
+
+
+
+    }
 
 
 
