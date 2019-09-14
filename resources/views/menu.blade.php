@@ -2,27 +2,20 @@
     .navbar {
         background-image: linear-gradient(to right, #14b2e9, yellow, #3652a3, #91eee8);
     }
-
     .navbar-light .navbar-nav .nav-link {
         color: black;
     }
-
-
     .navbar-nav>li {
         padding-left: 0.35rem;
         padding-right: 0.35rem;
     }
 </style>
-
-
-
 <nav id="navar-menu" class="navbar navbar-fixed-top navbar-expand-md navbar-light   bg-light">
-    <a class="navbar-brand" href="#">SIRCEE</a>
+    <a class="navbar-brand" href="#"> <img id="sigma" style="width:7rem " src="{{asset("/imagenes/sigma.png")}}"></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
         aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
-
     <div class="collapse navbar-collapse" id="navbarsExampleDefault">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
@@ -53,7 +46,6 @@
                 <div class="dropdown-menu" aria-labelledby="dropdown01">
                     <a class="dropdown-item" href="#">Consulta</a>
                     <a class="dropdown-item" href="#">Operaciones</a>
-
                 </div>
             </li>
             <li class="nav-item dropdown">
@@ -80,11 +72,8 @@
                     <a class="dropdown-item" href="#">Restaurar</a>
                    <a  class="dropdown-item font-weight-bold" style="color: red" href="{{ url('/logout') }}" onclick="event.preventDefault();
                                     document.getElementById('logout-form').submit();">Salir del Sistema</a>
-                   
                 </div>
             </li>
         </div>
     </div>
-
-
 </nav>

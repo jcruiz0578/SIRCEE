@@ -74,7 +74,7 @@
 		</div>
 		@endif
 		<div class="content">
-			<div class="title m-b-md">SIRCEE</div>
+			<div class="title m-b-md">   <img id="sigma" src="{{asset("/imagenes/sigma.png")}}"></div>
 			<div class="links">
 				<a href="#">Documentación</a> <a href="#">Noticias</a> <a href="#">Twitter</a> <a href="#">MPPE</a> <a
 					href="#"><b>JCRGLOBALTECH C.A</b></a>
