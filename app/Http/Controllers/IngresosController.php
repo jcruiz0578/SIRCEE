@@ -159,8 +159,14 @@ class IngresosController extends Controller
         $users->observacion = $request->input('observacion');
         $users->inscriptor = $request->input('inscriptor');
         $users->ficha = $request->input('ficha');
-        $users->id_procedencia = $request->input('id_procedencia');
-        $users->save();
+
+
+ $users->nombre_plantel = $request->input('nombre_plantel');
+  $users->save();
+    
+
+
+
         $viviendas = Vivienda::find($id_ingreso);
         if (is_null($viviendas)) {
             $viviendas = new Vivienda();
@@ -207,7 +213,7 @@ class IngresosController extends Controller
             ->join('vivienda', 'vivienda.id_ingreso', '=', 'ingresos.id_ingreso')
             ->join('documentos', 'documentos.id_ingreso', '=', 'ingresos.id_ingreso')
             ->join('tallas', 'tallas.id_ingreso', '=', 'ingresos.id_ingreso')
-            ->join('instituciones', 'instituciones.id_procedencia', '=', 'ingresos.id_procedencia')
+            ->join('instituciones', 'instituciones.nombre_plantel', '=', 'ingresos.nombre_plantel')
             ->select('estudiantes.*', 'ingresos.*', 'representantes.*', 'vivienda.*', 'tallas.*', 'documentos.*', 'instituciones.*')
             ->where('ingresos.id_ingreso', '=', $id_ingreso)->get()->first();
         $operacion = $operacion;

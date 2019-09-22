@@ -30,7 +30,7 @@ class Estudiante extends Model
 		'direccionest',
 		'telefonosest',
 		'emailest',
-		'id_procedencia'
+		'nombre_plantel'
 	];
 	public function ingreso()
 	{

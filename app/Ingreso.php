@@ -39,7 +39,7 @@ class Ingreso extends Model
 		'observacion',
 		'inscriptor',
 		'ficha',
-		'id_procedencia'
+		'nombre_plantel'
 	];
 	public function representante()
 	{
@@ -71,6 +71,6 @@ class Ingreso extends Model
 
 	public function institucion()
 	{
-		return $this->belongsTo('App\Institucion', 'id_procedencia');
+		return $this->belongsTo('App\Institucion', 'nombre_plantel');
 	}
 }

@@ -230,4 +230,25 @@ t.on( 'order.dt search.dt', function () { t.column(0, {search:'applied', order:'
 		});
 	</script>
 
+
+<script>
+            $(document).ready(function () {
+                // Parametros para el combo1
+                $("#lapso").change(function () {
+                    $("#anoest option:selected").each(function () {
+                        //alert($(this).val());
+                        elegido = $(this).val();
+                        $.post("materias_combox.blade.php, {elegido: elegido}, function (data) {
+                            $("#materias").html(data);
+                        });
+                    });
+                });
+            });
+
+        </script>
+
+
+
+
+
 	@endsection

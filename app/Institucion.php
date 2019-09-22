@@ -32,6 +32,6 @@ class Institucion extends Model
 
 	public function ingreso()
 	{
-		return $this->hasMany('App\Ingreso', 'id_procedencia');
+		return $this->hasMany('App\Ingreso', 'nombre_plantel');
 	}
 }

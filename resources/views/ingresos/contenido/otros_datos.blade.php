@@ -17,21 +17,17 @@
 
             <div class="form-group col-md-6">
                 {!! Form::label('procedencia', 'Pantel de Procedencia:', ['for' => 'procedencia'] ) !!}
-                <select name="id_procedencia" id="id_procedencia" class="form-control formato">
-                    <option value="{{ $users->id_procedencia }}" selected>
-                        {{ $users->nombre_plantel }}
-                    </option>
-
-
+                <select name="nombre_plantel" id="nombre_plantel" class="form-control formato">
+                    <option value="{{ $users->id_procedencia }}" selected>{{ $users->nombre_plantel }}</option>
                     @foreach($Institucion as $inst)
-
                     <option value="{{$inst->id_procedencia}}">{{$inst->nombre_plantel}}</option>
-
                     @endforeach
 
 
 
                 </select>
+
+               
             </div>
 
         </div>
@@ -93,4 +89,16 @@
 
 
     </div>
+
+ {!! Html::style('css/jquery-editable-select.min.css') !!}
+    {!! Html::script('js/jquery-editable-select.min.js') !!}
+
+<script type="text/javascript">
+    
+$('#nombre_plantel').editableSelect();
+
+ 
+</script>
+
+
 </div>
