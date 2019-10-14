@@ -46,7 +46,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('ingresos/show', ['as' => 'ingresos.show', 'uses' => 'IngresosController@show']);
     Route::post('ingresos/store', ['as' => 'ingresos.store', 'uses' => 'IngresosController@store']);
     Route::get('ingresos/editar/{id_ingreso}/{operacion}', ['as' => 'ingresos.editar', 'uses' => 'IngresosController@edit']);
-    Route::get('ingresos/create', ['as' => 'ingresos.create', 'uses' => 'IngresosController@create']);
+    Route::get('ingresos/create/{cedula}', ['as' => 'ingresos.create', 'uses' => 'IngresosController@create']);
     Route::put('ingresos/modificar/{id_ingreso}', ['as' => 'ingresos.update', 'uses' => 'IngresosController@update']);
     Route::post('ingresos/search', ['as' => 'ingresos.search', 'uses' => 'IngresosController@search']);
     Route::get('ingresos/search_individual/{id_ingreso}/{cedulaest}/{mensaje}', ['as' => 'ingresos.search_individual', 'uses' => 'IngresosController@search_individual']);

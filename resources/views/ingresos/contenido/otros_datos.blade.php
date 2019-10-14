@@ -18,11 +18,10 @@
             <div class="form-group col-md-6">
                 {!! Form::label('procedencia', 'Pantel de Procedencia:', ['for' => 'procedencia'] ) !!}
                 <select name="nombre_plantel" id="nombre_plantel" class="form-control formato">
-                    <option value="{{ $users->id_procedencia }}" selected>{{ $users->nombre_plantel }}</option>
+                    <option value="{{isset($users->nombre_plantel) ?  $users->nombre_plantel: old('nombre_plantel') }}" selected>{{isset($users->nombre_plantel) ?  $users->nombre_plantel: old('nombre_plantel') }}</option>
                     @foreach($Institucion as $inst)
-                    <option value="{{$inst->id_procedencia}}">{{$inst->nombre_plantel}}</option>
+                    <option value="{{$inst->nombre_plantel}}">{{$inst->nombre_plantel}}</option>
                     @endforeach
-
 
 
                 </select>

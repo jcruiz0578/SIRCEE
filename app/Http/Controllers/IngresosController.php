@@ -44,13 +44,23 @@ class IngresosController extends Controller
     }
   
 
-    public function create()
+    public function create($cedula)
     {
         // esta funcion envia al formulario para ingresar nuevos registros
-        $users = new Ingreso();
-        $operacion = 'PROSECUCION';
-        $Institucion = Institucion::orderBy('nombre_plantel', 'asc')
-            ->get();
+        // $users = new Ingreso();
+        // $operacion = 'PROSECUCION';
+        // $Institucion = Institucion::orderBy('nombre_plantel', 'asc')
+        //     ->get();
+
+$users = new Estudiante();
+             $users->cedulaest = $cedula;
+             $operacion = 'PROSECUCION';
+             $Institucion = Institucion::orderBy('nombre_plantel', 'asc')
+                 ->get();
+
+
+
+
         return view('ingresos/ingresos_egresos', compact('users', 'operacion', 'Institucion'));
         //return view ( 'ingresos/ingresos_egresos' )->with ( 'users', $users )->with ( 'operacion', $operacion );
     }
@@ -219,6 +229,9 @@ class IngresosController extends Controller
         $operacion = $operacion;
         $Institucion = Institucion::orderBy('nombre_plantel', 'asc')
             ->get();
+
+//dd($users);
+
         return view('ingresos/ingresos_egresos', compact('users', 'operacion', 'Institucion'));
     }
     
@@ -324,13 +337,25 @@ class IngresosController extends Controller
         } else {
             $agregar = "NO";
             // esta funcion envia al formulario para ingresar nuevos registros
-            $users = new Estudiante();
-            $users->cedulaest = $request->busqueda;
-            $operacion = 'PROSECUCION';
-            $Institucion = Institucion::orderBy('nombre_plantel', 'asc')
-                ->get();
-            Session::flash('error', 'La Cedula   ' . $request->busqueda . '   No esta Registrada. Puede Ingresar Este registro ahora');
-            return view('ingresos/ingresos_egresos', compact('users', 'operacion', 'Institucion'));
+            // $users = new Estudiante();
+            // $users->cedulaest = $request->busqueda;
+            // $operacion = 'PROSECUCION';
+            // $Institucion = Institucion::orderBy('nombre_plantel', 'asc')
+            //     ->get();
+            // Session::flash('error', 'La Cedula   ' . $request->busqueda . '   No esta Registrada. Puede Ingresar Este registro ahora');
+            // return view('ingresos/ingresos_egresos', compact('users', 'operacion', 'Institucion'));
+
+$cedula =$request->busqueda;
+
+
+ return redirect()->route('ingresos.create', array($cedula))->with('error', 'La Cedula   ' . $request->busqueda . '   No esta Registrada. Puede Ingresar Este registro ahora');
+
+
+
+
+
+
+
         }
     }
    
@@ -370,7 +395,7 @@ class IngresosController extends Controller
         // convertir la fecha que viene en formato Y/m/d a d/m/Y
         $fecha_nac = date("d/m/Y", strtotime($fecha_nac1));
         // $fecha_actual = date('d/m/Y'); // fecha actul del pc
-        $fecha_actual = date("30/09/2018"); // para pruebas
+        $fecha_actual = date("30/09/2019"); // para pruebas
         // separamos en partes las fechas
         $array_nacimiento = explode("/", $fecha_nac);
         $array_actual = explode("/", $fecha_actual);

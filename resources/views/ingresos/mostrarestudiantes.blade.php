@@ -12,7 +12,7 @@
     {!!Form::text('busqueda', null, ['class' => 'form-control ml-4', 'id' => 'busqueda', 'value' => '',
     'placeholder'=>'Cédula Id' ] ) !!}
     <button type="submit" class="btn btn-primary"><span><i class="fa fa-search"></i></span>Buscar</button>
-    <a href="{{ url('ingresos/create') }}" class="btn btn-success"><i class="far fa-file-alt"></i> Nuevo Ingreso</a>
+   {{--  <a href="{{ url('ingresos/create') }}" class="btn btn-success"><i class="far fa-file-alt"></i> Nuevo Ingreso</a> --}}
 </div>
 {!! Form::close() !!}
 @include('mensajes')

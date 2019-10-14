@@ -46,7 +46,7 @@
             {{ Form::select('lateralidad', ['N/A' => 'N/A',
                 'D' => 'Derecho(a)',
                 'Z' => 'Zurdo(a)',
-                'A' => 'Ambidiestro(a)'], null, ['class' => 'form-control formato']) }}&nbsp; &nbsp; &nbsp;
+                'A' => 'Ambidiestro(a)'], null, ['class' => 'form-control formato', 'id' => 'lateralidad']) }}&nbsp; &nbsp; &nbsp;
         </div>
 
         <div class="form-group col-md-3">
@@ -57,15 +57,8 @@
         </div>
 
 
-        <div class="form-group col-md-3">
-
-            {!! Form::label('fecha_ajuste', 'Fecha de Ajuste:', ['for' => 'fecha_ajuste'] ) !!}
-            {!! Form::Date('fecha_ajuste', null , ['class' => 'form-control formato', 'id' => 'fecha_ajuste',
-            'placeholder'
-            => 'dd/mm/aaaa...', 'value' => '' ] ) !!}
-
-        </div>
-        <div class="form-group col-md-3">
+       
+        <div class="form-group col-md-4">
 
             {!! Form::label('edad', 'Edad Calculada:', ['for' => 'edad'] ) !!}
             {!! Form::text('edad', null , ['class' => 'form-control formato', 'id' => 'edad', 'placeholder' => 'DAR
@@ -73,24 +66,25 @@
 
         </div>
 
+         <div class="form-group col-md-2">
+            {!! Form::label('ordennac', 'Orden de Nac.:', ['for' => 'ordennac'] ) !!}
+            {!! Form::number('orden_nac', null , ['class' => 'form-control formato', 'id' => 'orden_nac', 'value'
+            =>'','min'=> '0', 'max'=>'20' ] ) !!}
+        </div>
+
     </div>
 
     {{-- ---------------------------- --}}
 
     <div class="form-row">
-        <div class="form-group col-md-2">
-            {!! Form::label('ordennac', 'Orden de Nac.:', ['for' => 'ordennac'] ) !!}
-            {!! Form::number('orden_nac', null , ['class' => 'form-control formato', 'id' => 'ordennac', 'value'
-            =>'','min'=> '0', 'max'=>'20' ] ) !!}
-        </div>
+       
 
-        <div class="form-group col-md-2">
+        <div class="form-group col-md-3">
 
             {!! Form::label('estado_nac', 'Estado de Nac:', ['for' => 'estado_nac'] ) !!}
 
             <select name="estado_nac" id="estado_nac" class="form-control formato">
-                <option value="{{ $users->estado_nac or 'N/A' }}" disabled selected>
-                    {{ $users->estado_nac or 'N/A' }}
+                <option value="{{isset($users->estado) ? $users->estado: 'N/A' }}" disabled selected>{{isset($users->estado) ? $users->estado: 'N/A' }}
                 </option>
                 {{ $data = DB::table('ubicacion_estado')->select('nombre')->get() }}
                 @foreach($data as $rol)
@@ -100,7 +94,7 @@
         </div>
 
 
-        <div class="form-group col-md-6">
+        <div class="form-group col-md-7">
 
             {!! Form::label('lugar_nac', 'Lugar de Nac:', ['for' => 'lugar_nac'] ) !!}
             {!! Form::text('lugar_nac', null , ['class' => 'form-control formato', 'id' => 'lugar_nac', 'onKeyUp' =>

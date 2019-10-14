@@ -30,6 +30,7 @@
                 <option>D</option>
                 <option>E</option>
                 <option>F</option>
+                <option>G</option>
                 <option>H</option>
                 <option>I</option>
                 <option>U</option>

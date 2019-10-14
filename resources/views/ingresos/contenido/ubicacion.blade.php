@@ -65,7 +65,7 @@
             <div class="form-group col-md-3">
                 {!! Form::label('ubicacionvivienda', 'Ubic. de Vivienda:', ['for' => 'ubucacionvivienda'] ) !!}
                 {{ Form::select('ubicacionvivienda', ['N/A' => 'N/A', 
-                    'Urbanización' => 'Urbanizaciòn', 
+                    'Urbanización' => 'Urbanización', 
                     'Barrio' => 'Barrio', 
                     'Caserio' => 'Caserio', 
                     'Zona Residencial' => 'Zona Residencial'], null, ['class' => 'form-control formato']) }}
