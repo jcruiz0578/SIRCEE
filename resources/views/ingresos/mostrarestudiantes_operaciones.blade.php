@@ -71,10 +71,10 @@
         </div>
         <div class="form-group col-md-3">
             <a href="{{ url('ingresos/editar',array($user->id_ingreso, $operacion='EDITAR')) }}"
-                class=" form-control btn btn-success  "><span><i class="fa fa-list-alt"></i></span><b> Modificar</b></a>
+                class=" form-control btn btn-success  disabled"><span><i class="fa fa-list-alt"></i></span><b> Modificar</b></a>
         </div>
         <div class="form-group col-md-3">
-            <button class=" form-control VerRepresentante btn btn-secondary  " data-id="{{$user->id_ingreso}}"
+            <button class=" form-control VerRepresentante btn btn-secondary"  data-id="{{$user->id_ingreso}}"
                 data-ced_rep="{{$user->cedularep}}"
                 data-representante="{{$representante = $user->representante->apellidosrep.', '. $user->representante->nombresrep}}"
                 data-parentesco="{{$user->representante->parentescorep}}"
@@ -84,19 +84,19 @@
     </div>
     <div class="form-row justify-content-center">
         <div class="form-group col-md-4">
-            <button class="cedula-modal btn btn-warning form-control " style="vertical-align: middle;"
+            <button class="cedula-modal btn btn-warning form-control"  disabled   style="vertical-align: middle;"
                 data-id="{{$user->id_ingreso}}" data-cedula="{{$user->cedulaest}}">
                 <span><i class="fa fa-id-card"></i></span> <b>Modificar cédula</b></button>
         </div>
         <div class="form-group col-md-3">
-            <button class="fechaIE-modal btn btn-info form-control " data-id="{{$user->id_ingreso}}"
+            <button class="fechaIE-modal btn btn-info form-control "  disabled data-id="{{$user->id_ingreso}}"
                 data-cedula="{{$user->cedulaest}}"
                 data-estudiante="{{$estudiante = $user->estudiante->apellidosest.', '. $user->estudiante->nombresest}}"
                 data-anoest="{{$user->anoest}}" data-fecha_ingreso="{{$user->fecha_ingreso}}">
                 <span><i class="far fa-calendar-alt"></i></span> <b>Modif. Fecha Ingleso/Egreso</b></button>
         </div>
         <div id="egreso1" style="display:none" class="form-group col-md-3">
-            <button class="egreso-modal btn btn-danger form-control" data-id="{{$user->id_ingreso}}"
+            <button class="egreso-modal btn btn-danger form-control"  disabled  data-id="{{$user->id_ingreso}}"
                 data-cedula="{{$user->cedulaest}}"
                 data-estudiante="{{$estudiante = $user->estudiante->apellidosest.', '. $user->estudiante->nombresest}}"
                 data-anoest="{{$user->anoest}}" data-fecha_ingreso="{{$user->fecha_ingreso}}"
@@ -112,7 +112,11 @@
 @include('ingresos/ventanas_modales/modal_modificar_fechaIE')
 @include('ingresos/ventanas_modales/modal_egreso')
 @endsection
+
 {!! Html::script('js/jquery-3.3.1.js') !!}
+
+
+
 <script>
     /* para activar o no el boton prosecucion del archivo mostrarestudiantes_operaciones */
 jQuery(document).ready(function(){

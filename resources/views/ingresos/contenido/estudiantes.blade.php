@@ -57,7 +57,7 @@
         </div>
 
 
-       
+
         <div class="form-group col-md-4">
 
             {!! Form::label('edad', 'Edad Calculada:', ['for' => 'edad'] ) !!}
@@ -67,9 +67,9 @@
         </div>
 
          <div class="form-group col-md-2">
-            {!! Form::label('ordennac', 'Orden de Nac.:', ['for' => 'ordennac'] ) !!}
+            {!! Form::label('orden_nac', 'Orden de Nac.:', ['for' => 'orden_nac'] ) !!}
             {!! Form::number('orden_nac', null , ['class' => 'form-control formato', 'id' => 'orden_nac', 'value'
-            =>'','min'=> '0', 'max'=>'20' ] ) !!}
+            =>'','min'=> '0', 'max'=>'20', 'required' ] ) !!}
         </div>
 
     </div>
@@ -77,7 +77,7 @@
     {{-- ---------------------------- --}}
 
     <div class="form-row">
-       
+
 
         <div class="form-group col-md-3">
 
@@ -86,6 +86,7 @@
             <select name="estado_nac" id="estado_nac" class="form-control formato">
                 <option value="{{isset($users->estado) ? $users->estado: 'N/A' }}" disabled selected>{{isset($users->estado) ? $users->estado: 'N/A' }}
                 </option>
+                <option value="N/A">N/A</option>
                 {{ $data = DB::table('ubicacion_estado')->select('nombre')->get() }}
                 @foreach($data as $rol)
                 <option value="{{$rol->nombre}}">{{$rol->nombre}}</option>
@@ -104,7 +105,7 @@
         <div class="form-group col-md-2">
             {!! Form::label('estado_civil', 'Est Civil:', ['for' => 'estado_civil'] ) !!}
 
-            {{ Form::select('estado_civil', ['N/A' =>'N/A',
+            {{ Form::select('estado_civil', [ 'Soltero(a)' => 'Soltero(a)',
     'Soltero(a)' => 'Soltero(a)',
     'Casado(a)' => 'Casado(a)',
     'Divorciado(a)' => 'Divorciado(a)',

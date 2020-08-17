@@ -27,6 +27,7 @@
                 <th>sexo</th>
                 <th>Año y Secc</th>
                 <th>Status</th>
+                <th>Porcedencia</th>
                 <th>Operaciones</th>
             </tr>
         </thead>
@@ -40,6 +41,7 @@
                 <td>{{ $user->sexoest }}</td>
                 <td>{{ $user->anoest." ".$user->seccion }}</td>
                 <td>{{ $user->status }}</td>
+                <td>{{ $user->nombre_plantel }}</td>
                 <td><a href="{{ url('ingresos/search_individual', array($user->id_ingreso, $user->cedulaest, $mensaje='mostrar' )) }}"
                         class="btn btn-primary"><i class="fas fa-tools"></i> Operaciones</a></td>
             </tr>
@@ -54,6 +56,7 @@
                 <th>sexo</th>
                 <th>Año y Secc</th>
                 <th>Status</th>
+                <th>Porcedencia</th>
                 <th>Operaciones</th>
             </tr>
         </tfoot>

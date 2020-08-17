@@ -3,7 +3,7 @@
 // completa las materias segun el area de aprendizaje
 $rpta = "";
 
-if ($_POST ["elegido"] == "1") {
+if ($_POST ["elegido"] == "1ER AÑO") {
 	$rpta = '
 	<option value="Seleccionar">Seleccionar</option>
 	<option value="castellano">Castellano</option>
@@ -25,103 +25,103 @@ if ($_POST ["elegido"] == "1") {
         	';
 }
 
-if ($_POST ["elegido"] == "2") {
-	$rpta = '
-	<option value="Seleccionar">Seleccionar</option>
-	<option value="cast">Castellano</option>
-	<option value="Ing">Ingles</option>
-	<option value="cast">Castellano</option>
-	<option value="mat">Matematica</option>
-	<option value="ed_fis">Educación Física</option>
-	<option value="art_p">Arte y Patrimonio</option>
-	<option value="cs_naturales">Cs Naturales</option>
-	<option value="ghc">GHC</option>
-	<option value="orientacion">Orientación</option>
-	<option value="ge">Grupo de Interes</option>		
-        	';
-}
+// if ($_POST ["elegido"] == "2") {
+// 	$rpta = '
+// 	<option value="Seleccionar">Seleccionar</option>
+// 	<option value="cast">Castellano</option>
+// 	<option value="Ing">Ingles</option>
+// 	<option value="cast">Castellano</option>
+// 	<option value="mat">Matematica</option>
+// 	<option value="ed_fis">Educación Física</option>
+// 	<option value="art_p">Arte y Patrimonio</option>
+// 	<option value="cs_naturales">Cs Naturales</option>
+// 	<option value="ghc">GHC</option>
+// 	<option value="orientacion">Orientación</option>
+// 	<option value="ge">Grupo de Interes</option>		
+//         	';
+// }
 
-if ($_POST ["elegido"] == "3") {
-	$rpta = '
-	<option value="Seleccionar">Seleccionar</option>
-	<option value="cast">Castellano</option>
-	<option value="Ing">Ingles</option>
-	<option value="cast">Castellano</option>
-	<option value="mat">Matematica</option>
-	<option value="ed_fis">Educación Física</option>
-	<option value="fisica">Fisica</option>
-	<option value="quimica">Química</option>
-	<option value="bio">Biologia</option>
-	<option value="ghc">GHC</option>
-	<option value="orientacion">Orientación</option>
-	<option value="ge">Grupo de Interes</option>
+// if ($_POST ["elegido"] == "3") {
+// 	$rpta = '
+// 	<option value="Seleccionar">Seleccionar</option>
+// 	<option value="cast">Castellano</option>
+// 	<option value="Ing">Ingles</option>
+// 	<option value="cast">Castellano</option>
+// 	<option value="mat">Matematica</option>
+// 	<option value="ed_fis">Educación Física</option>
+// 	<option value="fisica">Fisica</option>
+// 	<option value="quimica">Química</option>
+// 	<option value="bio">Biologia</option>
+// 	<option value="ghc">GHC</option>
+// 	<option value="orientacion">Orientación</option>
+// 	<option value="ge">Grupo de Interes</option>
 			
-        	';
-}
+//         	';
+// }
 
 
-if ($_POST ["elegido"] == "4") {
-	$rpta = '
-	<option value="Seleccionar">Seleccionar</option>
-	<option value="cast">Castellano</option>
-	<option value="Ing">Ingles</option>
-	<option value="cast">Castellano</option>
-	<option value="mat">Matematica</option>
-	<option value="ed_fis">Educación Física</option>
-	<option value="fisica">Fisica</option>
-	<option value="quimica">Química</option>
-	<option value="bio">Biologia</option>
-	<option value="ghc">GHC</option>
-	<option value="fsn">FSN</option>
-	<option value="orientacion">Orientación</option>
-	<option value="ge">Grupo de Interes</option>
+// if ($_POST ["elegido"] == "4") {
+// 	$rpta = '
+// 	<option value="Seleccionar">Seleccionar</option>
+// 	<option value="cast">Castellano</option>
+// 	<option value="Ing">Ingles</option>
+// 	<option value="cast">Castellano</option>
+// 	<option value="mat">Matematica</option>
+// 	<option value="ed_fis">Educación Física</option>
+// 	<option value="fisica">Fisica</option>
+// 	<option value="quimica">Química</option>
+// 	<option value="bio">Biologia</option>
+// 	<option value="ghc">GHC</option>
+// 	<option value="fsn">FSN</option>
+// 	<option value="orientacion">Orientación</option>
+// 	<option value="ge">Grupo de Interes</option>
 			
-        	';
-}
+//         	';
+// }
 
-if ($_POST ["elegido"] == "5") {
-	$rpta = '
-	<option value="Seleccionar">Seleccionar</option>
-	<option value="cast">Castellano</option>
-	<option value="Ing">Ingles</option>
-	<option value="cast">Castellano</option>
-	<option value="mat">Matematica</option>
-	<option value="ed_fis">Educación Física</option>
-	<option value="fisica">Fisica</option>
-	<option value="quimica">Química</option>
-	<option value="bio">Biologia</option>
-	<option value="cs_tierra">Cs Tierra</option>
-	<option value="ghc">GHC</option>
-	<option value="fsn">FSN</option>
-	<option value="orientacion">Orientación</option>
-	<option value="ge">Grupo de Interes</option>
+// if ($_POST ["elegido"] == "5") {
+// 	$rpta = '
+// 	<option value="Seleccionar">Seleccionar</option>
+// 	<option value="cast">Castellano</option>
+// 	<option value="Ing">Ingles</option>
+// 	<option value="cast">Castellano</option>
+// 	<option value="mat">Matematica</option>
+// 	<option value="ed_fis">Educación Física</option>
+// 	<option value="fisica">Fisica</option>
+// 	<option value="quimica">Química</option>
+// 	<option value="bio">Biologia</option>
+// 	<option value="cs_tierra">Cs Tierra</option>
+// 	<option value="ghc">GHC</option>
+// 	<option value="fsn">FSN</option>
+// 	<option value="orientacion">Orientación</option>
+// 	<option value="ge">Grupo de Interes</option>
 			
-        	';
-}
+//         	';
+// }
 
 
 
-if ($_POST ["elegido"] == "nunca") {
-	$rpta = '
-	<option value="Seleccionar">Seleccionar</option>
-	<option value="cast">Castellano</option>
-	<option value="Ing">Ingles</option>
-	<option value="cast">Castellano</option>
-	<option value="mat">Matematica</option>
-	<option value="ed_fis">Educación Física</option>
-	<option value="art_p">Arte y Patrimonio</option>
-	<option value="cs_naturales">Cs Naturales</option>
-	<option value="fisica">Fisica</option>
-	<option value="quimica">Química</option>
-	<option value="bio">Biologia</option>
-	<option value="cs_tierra">Cs Tierra</option>
-	<option value="ghc">GHC</option>
-	<option value="fsn">FSN</option>
-	<option value="orientacion">Orientación</option>
-	<option value="ge">Grupo de Interes</option>
+// if ($_POST ["elegido"] == "nunca") {
+// 	$rpta = '
+// 	<option value="Seleccionar">Seleccionar</option>
+// 	<option value="cast">Castellano</option>
+// 	<option value="Ing">Ingles</option>
+// 	<option value="cast">Castellano</option>
+// 	<option value="mat">Matematica</option>
+// 	<option value="ed_fis">Educación Física</option>
+// 	<option value="art_p">Arte y Patrimonio</option>
+// 	<option value="cs_naturales">Cs Naturales</option>
+// 	<option value="fisica">Fisica</option>
+// 	<option value="quimica">Química</option>
+// 	<option value="bio">Biologia</option>
+// 	<option value="cs_tierra">Cs Tierra</option>
+// 	<option value="ghc">GHC</option>
+// 	<option value="fsn">FSN</option>
+// 	<option value="orientacion">Orientación</option>
+// 	<option value="ge">Grupo de Interes</option>
 			
-        	';
-}
+//         	';
+// }
 
 
 

@@ -32,6 +32,11 @@ class HomeController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+
+
+
+
+
     }
 
     /**
@@ -42,14 +47,15 @@ class HomeController extends Controller
     public function index(Request $request)
     {
 
-        $periodoescolar = $value = session()->get('periodoescolar');
 
-        $request->session()->forget('success');  // borra la sesion flash de mensajes 
+         $periodoescolar = $value = session()->get('periodoescolar');
+
+        $request->session()->forget('success');  // borra la sesion flash de mensajes
         $request->session()->forget('error');
 
 
         $users = Ingreso::join('estudiantes', 'estudiantes.cedulaest', '=', 'ingresos.cedulaest')
-            ->select('estudiantes.apellidosest', 'estudiantes.nombresest', 'estudiantes.sexoest', 'ingresos.id_ingreso', 'ingresos.periodoescolar', 'ingresos.cedulaest', 'ingresos.anoest', 'ingresos.seccion', 'ingresos.status')
+            ->select('estudiantes.apellidosest', 'estudiantes.nombresest', 'estudiantes.sexoest', 'estudiantes.nombre_plantel', 'ingresos.id_ingreso', 'ingresos.periodoescolar', 'ingresos.cedulaest', 'ingresos.anoest', 'ingresos.seccion', 'ingresos.status')
             ->where('periodoescolar', '=', $periodoescolar)
             ->orderBy('anoest', 'asc')
             ->orderBy('seccion', 'asc')
@@ -61,7 +67,7 @@ class HomeController extends Controller
 
 
         // echo $cedula= $request->busqueda;
-        /* 
+        /*
         if (count($users) > 0) {
             echo $agregar = "SI";
         } else {

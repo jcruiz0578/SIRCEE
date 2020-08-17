@@ -90,7 +90,7 @@
         <div class="form-row">
             <div class="form-group col-md-5">
                 {!! Form::label('trabaja', 'Trabaja?:', ['for' => 'trabaja'] ) !!}
-                {{ Form::select('trabaja', ['N/A' => 'N/A',
+                {{ Form::select('trabaja', ['NO' => 'NO',
             'NO' => 'NO',
             'SI' => 'SI'], null, ['class' => 'form-control formato', 'id'=>'trabaja', 'onChange' => 'activar_trabajo()']) }}
             </div>

@@ -46,9 +46,7 @@ border-radius: 1.2rem 1.2rem 1.2rem 1.2rem;">
 		<div class="form-group col-md-2">
 			<label for="">Area</label>
 			<select name="materias" id="materias" class="form-control font-weight-bold">
-				<option value="N/A">N/A</option>
-				<option value="castellano">Catellano</option>
-				<option value="matematica">Matematica</option>
+			
 			</select>
 		</div>
 		<div class="form-group col-md-2">
@@ -232,20 +230,21 @@ t.on( 'order.dt search.dt', function () { t.column(0, {search:'applied', order:'
 
 
 <script>
-            $(document).ready(function () {
-                // Parametros para el combo1
-                $("#lapso").change(function () {
-                    $("#anoest option:selected").each(function () {
-                        //alert($(this).val());
-                        elegido = $(this).val();
-                        $.post("materias_combox.blade.php, {elegido: elegido}, function (data) {
-                            $("#materias").html(data);
-                        });
-                    });
-                });
-            });
+	$(document).ready(function () {
+		// Parametros para el combo1
+		$("#anoest").change(function () {
+			$("#anoest option:selected").each(function () {
+				alert($(this).val());
+				elegido = $(this).val();
+				$.post("materias_combox.blade.php", {elegido: elegido}, function (data) {
+					$("#materias").html(data);
+				});
+			});
+		});
+	});
 
-        </script>
+</script>
+
 
 
 

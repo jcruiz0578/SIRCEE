@@ -1,23 +1,22 @@
 <?php
 namespace App\Http\Controllers;
+
 // use App\User;
+use App\Calificacion;
+use App\Documento;
 use App\Estudiante;
+use App\Http\Requests\ValidarIngreso;
 use App\Ingreso;
+use App\Institucion;
 use App\Representante;
-use App\Egreso;
 use App\Talla;
 use App\Vivienda;
-use App\Documento;
-use App\Http\Controllers\Auth\ResetPasswordController;
-use App\Institucion;
-use App\Calificacion;
-use Illuminate\Http\Request;
 //use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Session;
+use Illuminate\Http\Request;
 //use Illuminate\Support\Facades\Input;
-use App\Http\Requests\ValidarIngreso; //validacion personalizada
+use Illuminate\Support\Facades\Session; //validacion personalizada
 use Yajra\DataTables\Facades\DataTables;
+
 // use Session;
 class IngresosController extends Controller
 {
@@ -42,34 +41,25 @@ class IngresosController extends Controller
         $agregar = count($users) > 0 ? "SI" : "NO";
         return View('ingresos/mostrarestudiantes')->with('users', $users)->with('agregar', $agregar);
     }
-  
 
     public function create($cedula)
     {
         // esta funcion envia al formulario para ingresar nuevos registros
-        // $users = new Ingreso();
-        // $operacion = 'PROSECUCION';
-        // $Institucion = Institucion::orderBy('nombre_plantel', 'asc')
-        //     ->get();
 
-$users = new Estudiante();
-             $users->cedulaest = $cedula;
-             $operacion = 'PROSECUCION';
-             $Institucion = Institucion::orderBy('nombre_plantel', 'asc')
-                 ->get();
-
-
-
+        $users = new Estudiante();
+        $users->cedulaest = $cedula;
+        $operacion = 'PROSECUCION';
+        $Institucion = Institucion::orderBy('nombre_plantel', 'asc')
+            ->get();
 
         return view('ingresos/ingresos_egresos', compact('users', 'operacion', 'Institucion'));
         //return view ( 'ingresos/ingresos_egresos' )->with ( 'users', $users )->with ( 'operacion', $operacion );
     }
-   
 
     public function store(ValidarIngreso $request)
     {
         // esta funcion agrega nuevos registros
-        $data = $request->all();  //  tomar todos los elementos del formulario que vienen via post
+        $data = $request->all(); //  tomar todos los elementos del formulario que vienen via post
         $cedulaest = $request->input('cedulaest');
         $estudiantes = Estudiante::find($cedulaest);
         $telefonosest = $request->input('telefonosrep');
@@ -90,7 +80,7 @@ $users = new Estudiante();
             $representantes->fill($data);
             $representantes->save();
         }
-        $users = new Ingreso();  // inicializar el modelo  Ingreso
+        $users = new Ingreso(); // inicializar el modelo  Ingreso
         $periodoescolar = session()->get('periodoescolar');
         $condicionest = $request->input('condicionest');
         $id_ingreso = trim($periodoescolar . '-' . $cedulaest . 'I');
@@ -170,12 +160,8 @@ $users = new Estudiante();
         $users->inscriptor = $request->input('inscriptor');
         $users->ficha = $request->input('ficha');
 
-
- $users->nombre_plantel = $request->input('nombre_plantel');
-  $users->save();
-    
-
-
+        $users->nombre_plantel = $request->input('nombre_plantel');
+        $users->save();
 
         $viviendas = Vivienda::find($id_ingreso);
         if (is_null($viviendas)) {
@@ -204,17 +190,16 @@ $users = new Estudiante();
         $mensaje = "mostrar";
         //Session::flash('success', 'La Cedula   ' . $request->busqueda . '    Esta Registrada');
         Session::flash('message', 'El Registro fue Ingresado con Exito');
-        return redirect()->route('ingresos.search_individual', array($id_ingreso,  $cedulaest, $mensaje));
+        return redirect()->route('ingresos.search_individual', array($id_ingreso, $cedulaest, $mensaje));
     }
     public function show()
-    { }
+    {}
     /**
      *
      * @param
      *          $id_ingreso
      * @return $this
      */
-  
 
     public function edit($id_ingreso, $operacion)
     {
@@ -234,7 +219,6 @@ $users = new Estudiante();
 
         return view('ingresos/ingresos_egresos', compact('users', 'operacion', 'Institucion'));
     }
-    
 
     public function update(ValidarIngreso $request, $id_ingreso)
     {
@@ -308,13 +292,11 @@ $users = new Estudiante();
         // return view('ingresos/ingresos_egresos')->with('users',$users)->with('message', 'El Registro fue Modificado con Exito');
         return redirect()->route('ingresos.editar', array($users->id_ingreso, $operacion))->with('message', 'El Registro fue Modificado con Exito');
     }
-    
 
     public function destroy($id)
     {
         return "holaaaa";
     }
-  
 
     public function search(Request $request)
     {
@@ -322,7 +304,7 @@ $users = new Estudiante();
             return redirect()->to('ingresos/index')->with('success', 'No ha Introducido ninguna Cedula...');
         }
         $users = Ingreso::join('estudiantes', 'estudiantes.cedulaest', '=', 'ingresos.cedulaest')
-            ->select('estudiantes.apellidosest', 'estudiantes.nombresest', 'estudiantes.sexoest', 'ingresos.id_ingreso', 'ingresos.periodoescolar', 'ingresos.cedulaest', 'ingresos.anoest', 'ingresos.seccion', 'ingresos.status')
+            ->select('estudiantes.apellidosest', 'estudiantes.nombresest', 'estudiantes.sexoest', 'estudiantes.nombre_plantel', 'ingresos.id_ingreso', 'ingresos.periodoescolar', 'ingresos.cedulaest', 'ingresos.anoest', 'ingresos.seccion', 'ingresos.status')
             ->where('ingresos.cedulaest', '=', $request->busqueda)
             ->orderBy('periodoescolar', 'desc')
             ->orderBy('anoest', 'asc')
@@ -345,20 +327,12 @@ $users = new Estudiante();
             // Session::flash('error', 'La Cedula   ' . $request->busqueda . '   No esta Registrada. Puede Ingresar Este registro ahora');
             // return view('ingresos/ingresos_egresos', compact('users', 'operacion', 'Institucion'));
 
-$cedula =$request->busqueda;
+            $cedula = $request->busqueda;
 
-
- return redirect()->route('ingresos.create', array($cedula))->with('error', 'La Cedula   ' . $request->busqueda . '   No esta Registrada. Puede Ingresar Este registro ahora');
-
-
-
-
-
-
+            return redirect()->route('ingresos.create', array($cedula))->with('error', 'La Cedula   ' . $request->busqueda . '   No esta Registrada. Puede Ingresar Este registro ahora');
 
         }
     }
-   
 
     public function search_individual($id_ingreso, $cedulaest, $mensaje)
     {
@@ -379,15 +353,14 @@ $cedula =$request->busqueda;
         /************* */
         return View('ingresos/mostrarestudiantes_operaciones', compact('users', 'boton', 'mensaje'));
         /*    $users = Ingreso::join('estudiantes', 'estudiantes.cedulaest', '=', 'ingresos.cedulaest')
-            ->join('representantes', 'representantes.cedularep', '=', 'ingresos.cedularep')
-            ->join('vivienda', 'vivienda.id_ingreso', '=', 'ingresos.id_ingreso')
-            ->join('documentos', 'documentos.id_ingreso', '=', 'ingresos.id_ingreso')
-            ->join('tallas', 'tallas.id_ingreso', '=', 'ingresos.id_ingreso')
-            ->select('estudiantes.*', 'ingresos.*', 'representantes.*', 'vivienda.*', 'tallas.*', 'documentos.*')
-            ->where('ingresos.id_ingreso', '=', $id)->get(); */
+        ->join('representantes', 'representantes.cedularep', '=', 'ingresos.cedularep')
+        ->join('vivienda', 'vivienda.id_ingreso', '=', 'ingresos.id_ingreso')
+        ->join('documentos', 'documentos.id_ingreso', '=', 'ingresos.id_ingreso')
+        ->join('tallas', 'tallas.id_ingreso', '=', 'ingresos.id_ingreso')
+        ->select('estudiantes.*', 'ingresos.*', 'representantes.*', 'vivienda.*', 'tallas.*', 'documentos.*')
+        ->where('ingresos.id_ingreso', '=', $id)->get(); */
         /* ->paginate(); */
     }
-  
 
     public function calculo_edad(Request $request)
     {
@@ -395,7 +368,7 @@ $cedula =$request->busqueda;
         // convertir la fecha que viene en formato Y/m/d a d/m/Y
         $fecha_nac = date("d/m/Y", strtotime($fecha_nac1));
         // $fecha_actual = date('d/m/Y'); // fecha actul del pc
-        $fecha_actual = date("30/09/2019"); // para pruebas
+        $fecha_actual = date("30/09/2020"); // para pruebas
         // separamos en partes las fechas
         $array_nacimiento = explode("/", $fecha_nac);
         $array_actual = explode("/", $fecha_actual);
@@ -470,7 +443,6 @@ $cedula =$request->busqueda;
         // return response ()->json ( [ 'edad' => $edad, 'state' => 'sucre' ] );
         return response()->json(['edad' => $edad]);
     }
-   
 
     public function representantes_consulta(Request $request)
     {
@@ -500,7 +472,6 @@ $cedula =$request->busqueda;
             'direccionrep' => $direccionrep,
         ]);
     }
-   
 
     public function consultar_secciones(Request $request)
     {
@@ -508,7 +479,7 @@ $cedula =$request->busqueda;
         if ($request->ajax()) {
             $periodoescolar = $value = session()->get('periodoescolar');
             $users = Ingreso::join('estudiantes', 'estudiantes.cedulaest', '=', 'ingresos.cedulaest')
-                ->select('estudiantes.apellidosest', 'estudiantes.nombresest', 'estudiantes.sexoest', 'estudiantes.fnest',   'ingresos.id_ingreso', 'ingresos.periodoescolar', 'ingresos.cedulaest', 'ingresos.anoest', 'ingresos.seccion', 'ingresos.status')
+                ->select('estudiantes.apellidosest', 'estudiantes.nombresest', 'estudiantes.sexoest', 'estudiantes.fnest', 'ingresos.id_ingreso', 'ingresos.periodoescolar', 'ingresos.cedulaest', 'ingresos.anoest', 'ingresos.seccion', 'ingresos.status')
                 ->where('periodoescolar', '=', $periodoescolar)
                 ->orderBy('anoest', 'asc')
                 ->orderBy('fnest', 'desc')
@@ -521,7 +492,6 @@ $cedula =$request->busqueda;
         // si no es ajax
         return view('ingresos/asignar_seccion');
     }
-   
 
     public function asignar_seccion(Request $request)
     {
@@ -540,32 +510,74 @@ $cedula =$request->busqueda;
             'seccion' => $seccion,
         ]);
     }
-   
+
+    public function prosecusion(Request $request)
+    {
+
+        $id_ingreso = $resquest->input('id_est');
+
+        foreach ($id_ingreso as $ingreso) {
+
+            $ingresos = Ingreso::find($ingreso);
+            $ingresos->save();
+
+            $cedulaest = $ingresos->cedulaest;
+            $periodoescolar = '2020-2021'; //'session()->get('periodoescolar');
+            $id = trim($periodoescolar . '-' . $cedulaest . 'I');
+
+            $users = new Ingresos();
+
+            $users->id_ingreso = $id;
+            $users->periodoescolar = $periodoescolar;
+            $users->cedulaest = $cedulaest;
+            $users->condicionest = 'REGULAR';
+            $users->repitienteest = 'NO';
+            $users->materiapendiente = 'NO';
+            $users->mp_nombres = 'N/A';
+            $users->rezagado = 'NO';
+            $users->nuevo_ingreso = 'NO';
+            $users->anoest = '5TO   AÑO CS';
+            $users->seccion = $ingresos->seccion;
+            $users->cedularep = $ingresos->cedularep;
+            $users->fecha_ingreso = date('Y-m-d');
+            $users->mes_ingreso = 'JULIO';
+            $users->fechasistema = date('Y-m-d');
+            $users->reinscripcion = 'N/A';
+            $users->tipoinscripcion = 'REGULAR';
+            $users->status = 'I';
+            $users->observacion = $ingresos->observacion;
+            $users->inscriptor = 'JUAN CARLOS RUIZ';
+            $users->ficha = '0';
+            $users->nombre_plantel = $ingresos->nombre_plantel;
+
+            $users->save();
+
+        }
+
+    }
 
     public function constancia_estudios()
     {
         return view('ingresos/constancia_estudios');
     }
-   
 
     public function constancia_estudios_proceso(Request $request)
     {
         if ($request->ajax()) {
             $periodoescolar = $value = session()->get('periodoescolar');
             $cedulaest = $request->input('cedulaest');
-           
+
             $estudiantes = Ingreso::where('cedulaest', '=', $cedulaest)->get();
-          
+
             if (count($estudiantes) > 0) {
                 $validar = "SI";
-             
 
                 $c = Ingreso::with('Estudiante')
                     ->where('ingresos.cedulaest', '=', $cedulaest)
                     ->where('periodoescolar', '=', $periodoescolar)
                     ->first();
                 $apellidosest = $c->estudiante->apellidosest;
-                $nombresest =  $c->estudiante->nombresest;
+                $nombresest = $c->estudiante->nombresest;
                 $sexoest = $c->estudiante->sexoest;
                 $anoest = $c->anoest;
                 $seccion = $c->seccion;
@@ -588,112 +600,104 @@ $cedula =$request->busqueda;
         }
     }
 
-
-public function calificaciones_consulta(Request $request)
+    public function calificaciones_consulta(Request $request)
     {
         // si la peticion es ajax
-            $periodoescolar = $value = session()->get('periodoescolar');
-  $anoest = $request->input('anoest');
-   $seccion = $request->input('seccion');
+        $periodoescolar = $value = session()->get('periodoescolar');
+        $anoest = $request->input('anoest');
+        $seccion = $request->input('seccion');
 
-            $users = Ingreso::join('estudiantes', 'estudiantes.cedulaest', '=', 'ingresos.cedulaest')
-                ->select('estudiantes.apellidosest', 'estudiantes.nombresest', 'estudiantes.sexoest', 'estudiantes.fnest',   'ingresos.id_ingreso', 'ingresos.periodoescolar', 'ingresos.cedulaest', 'ingresos.anoest', 'ingresos.seccion', 'ingresos.status')
-                ->where('periodoescolar', '=', $periodoescolar)
-                 ->where('anoest', '=', $anoest)
-                 ->where('seccion', '=', $seccion)
-                ->orderBy('cedulaest', 'desc')
-                 ->orderBy('fnest', 'desc')
-                ->get();
+        $users = Ingreso::join('estudiantes', 'estudiantes.cedulaest', '=', 'ingresos.cedulaest')
+            ->select('estudiantes.apellidosest', 'estudiantes.nombresest', 'estudiantes.sexoest', 'estudiantes.fnest', 'ingresos.id_ingreso', 'ingresos.periodoescolar', 'ingresos.cedulaest', 'ingresos.anoest', 'ingresos.seccion', 'ingresos.status')
+            ->where('periodoescolar', '=', $periodoescolar)
+            ->where('anoest', '=', $anoest)
+            ->where('seccion', '=', $seccion)
+            ->orderBy('cedulaest', 'desc')
+            ->orderBy('fnest', 'desc')
+            ->get();
 
-             return Datatables::of($users)
-->addColumn('id_ingreso', '<input type="text" id="id_ingreso[]" name="id_ingreso[]" class="form-control  text-center  " value="{{$id_ingreso}}"  disabled>')
-                ->addColumn('nota', '<input type="text" id="nota[]" name="nota[]" style="width: 60px; text-align: center"  >')
-                 ->rawColumns(['nota', 'id_ingreso'])
-                 ->make(true);
+        return Datatables::of($users)
+            ->addColumn('id_ingreso', '<input type="text" id="id_ingreso[]" name="id_ingreso[]" class="form-control  text-center  " value="{{$id_ingreso}}"  disabled>')
+            ->addColumn('nota', '<input type="text" id="nota[]" name="nota[]" style="width: 60px; text-align: center"  >')
+            ->rawColumns(['nota', 'id_ingreso'])
+            ->make(true);
     }
 
-
-public function calificaciones_registrar(Request $request)
+    public function calificaciones_registrar(Request $request)
     {
-      $periodoescolar = $value = session()->get('periodoescolar');
-      $id_ingreso = $request->input('id_ingreso');
-      $lapso = $request->input('lapso');
-      $anoest = $request->input('anoest');
-      $seccion = $request->input('seccion');
-       $materias = $request->input('materias');
-      $nota = $request->input('nota');
+        $periodoescolar = $value = session()->get('periodoescolar');
+        $id_ingreso = $request->input('id_ingreso');
+        $lapso = $request->input('lapso');
+        $anoest = $request->input('anoest');
+        $seccion = $request->input('seccion');
+        $materias = $request->input('materias');
+        $nota = $request->input('nota');
 
-for($i    = 0; $i<count($id_ingreso) ; $i++)
-{
-
+        for ($i = 0; $i < count($id_ingreso); $i++) {
 
 /***********************************/
 // se busca el registro con id_ingreso, periodoescolar y lapso en la tabla
 
- $comprobacion1 = Calificacion::where('id_ingreso', '=', $id_ingreso[$i])
-            ->where('periodoescolar', '=', $periodoescolar)
-             ->where('lapso', '=', $lapso)
-             ->first();
+            $comprobacion1 = Calificacion::where('id_ingreso', '=', $id_ingreso[$i])
+                ->where('periodoescolar', '=', $periodoescolar)
+                ->where('lapso', '=', $lapso)
+                ->first();
 
 //si no esta el registro
-if (is_null($comprobacion1)) {
-
-
+            if (is_null($comprobacion1)) {
 
 /***********************************/
- $comprobacion = Calificacion::where('id_ingreso', '=', $id_ingreso[$i])
-            ->where('periodoescolar', '=', $periodoescolar)
-             ->where('lapso', '=', $lapso)
-              ->where($materias, '>=', 0)
-              ->first();
-        
-if (is_null($comprobacion)) {
- $calificaciones = new Calificacion(); // ae crea el registro  nuevo
-            $calificaciones->id_ingreso = $id_ingreso[$i];
-            $calificaciones->periodoescolar = $periodoescolar;
-            $calificaciones->lapso = $lapso;
-            $calificaciones->$materias = $nota[$i];
-             $calificaciones->save();   
+                $comprobacion = Calificacion::where('id_ingreso', '=', $id_ingreso[$i])
+                    ->where('periodoescolar', '=', $periodoescolar)
+                    ->where('lapso', '=', $lapso)
+                    ->where($materias, '>=', 0)
+                    ->first();
 
+                if (is_null($comprobacion)) {
+                    $calificaciones = new Calificacion(); // ae crea el registro  nuevo
+                    $calificaciones->id_ingreso = $id_ingreso[$i];
+                    $calificaciones->periodoescolar = $periodoescolar;
+                    $calificaciones->lapso = $lapso;
+                    $calificaciones->$materias = $nota[$i];
+                    $calificaciones->save();
 
-         }else{
-            // se actualiza
-           
-$calificaciones =  Calificacion::where('id_ingreso', '=', $id_ingreso[$i])
-            ->where('periodoescolar', '=', $periodoescolar)
-             ->where('lapso', '=', $lapso)
-              ->where($materias, '>=', 0)
-          ->update([$materias => $nota[$i]]);
+                } else {
+                    // se actualiza
 
-           
-         }
+                    $calificaciones = Calificacion::where('id_ingreso', '=', $id_ingreso[$i])
+                        ->where('periodoescolar', '=', $periodoescolar)
+                        ->where('lapso', '=', $lapso)
+                        ->where($materias, '>=', 0)
+                        ->update([$materias => $nota[$i]]);
+
+                }
 /***************************************************/
 
+            } else {
 
-}else{
+                $calificaciones2 = Calificacion::where('id_ingreso', '=', $id_ingreso[$i])
+                    ->where('periodoescolar', '=', $periodoescolar)
+                    ->where('lapso', '=', $lapso)
+                    ->update([$materias => $nota[$i]]);
 
-    $calificaciones2 =  Calificacion::where('id_ingreso', '=', $id_ingreso[$i])
-            ->where('periodoescolar', '=', $periodoescolar)
-             ->where('lapso', '=', $lapso)
-             ->update([$materias => $nota[$i]]);
+            }
 
-           
-         }
-
-
- //return $calificaciones;
- // return response()->json([
- //             'id_ingreso' => $id_ingreso,
- //             'periodoescolar' => $periodoescolar,
- //             'lapso' => $lapso,
- //             'anoest' => $anoest,
- //             'seccion' => $seccion,
- //             'materias' => $materias,
- //             'nota' => $nota,
- //        ]);
+            //return $calificaciones;
+            // return response()->json([
+            //             'id_ingreso' => $id_ingreso,
+            //             'periodoescolar' => $periodoescolar,
+            //             'lapso' => $lapso,
+            //             'anoest' => $anoest,
+            //             'seccion' => $seccion,
+            //             'materias' => $materias,
+            //             'nota' => $nota,
+            //        ]);
+        }
     }
-}
 
+
+
+      
 
 
 

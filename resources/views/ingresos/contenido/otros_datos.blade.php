@@ -26,7 +26,7 @@
 
                 </select>
 
-               
+
             </div>
 
         </div>
@@ -37,11 +37,11 @@
 
         <div style="height: 3rem"></div>
 
-        <h3 class="text-danger font-weight-bold">Medidas y Tallas</h3>
+        {{-- <h3 class="text-danger font-weight-bold">Medidas y Tallas</h3> --}}
 
         {{-- ---------------------------- --}}
 
-        <div class="form-row">
+        {{-- <div class="form-row">
             <div class="form-group col-md-2">
                 {!! Form::label('altura', 'Altura(Metro):', ['for' => 'altura'] ) !!}
                 {!! Form::text('altura', null , ['class' => 'form-control formato', 'id' => 'altura', 'value' => ''] )
@@ -72,7 +72,7 @@
                 !!}
             </div>
 
-        </div>
+        </div> --}}
 
         <div class="form-row">
             <div class="form-group col-md-12">
@@ -80,7 +80,7 @@
                 {!! Form::textarea('observacion', null , ['size' => '50x3', 'class' => 'form-control formato', 'id' =>
                 'observacion', 'onKeyUp' => 'this.value = this.value.toUpperCase()','value' => '',
                 'placeholder'=>
-                'Informacion relevante del estudiante, que no tiene campo de llenado en la ficha electronica'] ) !!}
+                'Informacion relevante del estudiante, que no tiene campo de llenado en la ficha electronica', 'maxlength'=>'200'] ) !!}
             </div>
         </div>
 
@@ -93,10 +93,10 @@
     {!! Html::script('js/jquery-editable-select.min.js') !!}
 
 <script type="text/javascript">
-    
+
 $('#nombre_plantel').editableSelect();
 
- 
+
 </script>
 
 

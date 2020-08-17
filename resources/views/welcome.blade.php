@@ -68,9 +68,9 @@
 		<div class="top-right links">
 			<a href="{{ url('/login') }}">
 				<font color="RED">Iniciar Sesión</font>
-			</a> <a href="{{ url('/register') }}">
+			</a> {{-- <a href="{{ url('/register') }}">
 				<font color="RED">Registrarse</font>
-			</a>
+			</a> --}}
 		</div>
 		@endif
 		<div class="content">

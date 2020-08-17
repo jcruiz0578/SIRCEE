@@ -6,15 +6,17 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="_token" content="{!! csrf_token() !!}" />
     <title>Sistema Integral de Gestión Matricular Avanzado</title>
-   <!--  {!! Html::style('css/bootstrap4.3.1.css') !!}
-  -->
+  
   {!! Html::style('css/app.css') !!}
+ 
+
 <!-- ya el css de laravel tiene integrado fontawesome
  -->
-<!-- 
-    {!! Html::style('fontawesome/css/all.css') !!}
-    {!! Html::script('fontawesome/js/all.js') !!}
- -->
+
+    {{-- {!! Html::style('fontawesome/css/all.css') !!}
+    {!! Html::script('fontawesome/js/all.js') !!} --}}
+
+
     <style>
         .footer {
             font-size: .70rem;
@@ -50,7 +52,20 @@
         </footer>
     </div>
     <!-- Scripts -->
-    {!! Html::script('js/popper.min.js') !!}
+
+    {{-- {!! Html::script('js/app.js') !!} --}}
+
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
+</script> 
     {!! Html::script('js/bootstrap.min.js') !!}
+
+
+
+
+   
+
+
+
 </body>
 </html>

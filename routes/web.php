@@ -88,6 +88,8 @@ Route::get('calificaciones_consulta', ['as' => 'calificaciones.consulta', 'uses'
 Route::get('calificaciones/registrar', ['as' => 'calificaciones.registrar', 'uses' => 'IngresosController@calificaciones_registrar']);
 
 
+
+
 });
 
 

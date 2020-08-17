@@ -121,7 +121,7 @@ $titulo='INSCRIPCIÓN';
 	@include('ingresos/contenido/ubicacion')
 	@include('ingresos/contenido/otros_datos')
 	@include('ingresos/contenido/representantes')
-	@include('ingresos/contenido/documentos')
+	{{-- @include('ingresos/contenido/documentos') --}}
 
 </div>
 

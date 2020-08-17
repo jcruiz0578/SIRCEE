@@ -31,7 +31,7 @@ $(document).ready(function () {
         },
 
         processing: true,
-        serverSide: true,
+        /*serverSide: true,*/
 
         ajax: "/ingresos/consultar_secciones",
 

@@ -81,9 +81,9 @@
                             <a class="navbar-brand" href="{{ url('/login') }}"><b>Iniciar
                                     Sesión&nbsp;&nbsp;&nbsp;</b></a>
                         </li>
-                        <li>
+                        {{-- <li>
                             <a class="navbar-brand nav" href="{{ url('/register') }}"><b>Registarse</b></a>
-                        </li>
+                        </li> --}}
                     </ul>
 
 
