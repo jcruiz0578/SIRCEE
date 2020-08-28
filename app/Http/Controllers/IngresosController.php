@@ -511,50 +511,7 @@ class IngresosController extends Controller
         ]);
     }
 
-    public function prosecusion(Request $request)
-    {
 
-        $id_ingreso = $resquest->input('id_est');
-
-        foreach ($id_ingreso as $ingreso) {
-
-            $ingresos = Ingreso::find($ingreso);
-            $ingresos->save();
-
-            $cedulaest = $ingresos->cedulaest;
-            $periodoescolar = '2020-2021'; //'session()->get('periodoescolar');
-            $id = trim($periodoescolar . '-' . $cedulaest . 'I');
-
-            $users = new Ingresos();
-
-            $users->id_ingreso = $id;
-            $users->periodoescolar = $periodoescolar;
-            $users->cedulaest = $cedulaest;
-            $users->condicionest = 'REGULAR';
-            $users->repitienteest = 'NO';
-            $users->materiapendiente = 'NO';
-            $users->mp_nombres = 'N/A';
-            $users->rezagado = 'NO';
-            $users->nuevo_ingreso = 'NO';
-            $users->anoest = '5TO   AÑO CS';
-            $users->seccion = $ingresos->seccion;
-            $users->cedularep = $ingresos->cedularep;
-            $users->fecha_ingreso = date('Y-m-d');
-            $users->mes_ingreso = 'JULIO';
-            $users->fechasistema = date('Y-m-d');
-            $users->reinscripcion = 'N/A';
-            $users->tipoinscripcion = 'REGULAR';
-            $users->status = 'I';
-            $users->observacion = $ingresos->observacion;
-            $users->inscriptor = 'JUAN CARLOS RUIZ';
-            $users->ficha = '0';
-            $users->nombre_plantel = $ingresos->nombre_plantel;
-
-            $users->save();
-
-        }
-
-    }
 
     public function constancia_estudios()
     {
@@ -697,7 +654,7 @@ class IngresosController extends Controller
 
 
 
-      
+
 
 
 

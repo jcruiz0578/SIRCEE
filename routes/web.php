@@ -15,7 +15,7 @@
 use Yajra\DataTables\Facades\DataTables; */
 
 
-/* 
+/*
 Route::get('/', function () {
     return view('welcome');
 });
@@ -87,8 +87,10 @@ Route::get('calificaciones_consulta', ['as' => 'calificaciones.consulta', 'uses'
 
 Route::get('calificaciones/registrar', ['as' => 'calificaciones.registrar', 'uses' => 'IngresosController@calificaciones_registrar']);
 
-
-
+// PROSECUCIÓN
+    Route::view('prosecucion/llenar', 'prosecucion/prosecucion_llenado');
+    Route::get('prosecucion_consulta', ['as' => 'prosecucion_consulta', 'uses' => 'ProsecusionController@prosecucion_consulta']);
+    Route::get('prosecucion/registrar', ['as' => 'prosecucion.registrar', 'uses' => 'ProsecusionController@prosecucion_registrar']);
 
 });
 

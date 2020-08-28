@@ -42,7 +42,7 @@
 
         <div class="form-group     col-md-2  align-self-end ">
             <button type="submit" id="enviar" class="btn btn-primary  form-control font-weight-bold enviar"
-                style="height: 4rem; "><span><i class="fa fa-list-alt"></i> Asignar/Cambiar</button>
+                style="height: 4rem; "><i class="fa fa-list-alt"></i> Asignar/Cambiar</button>
         </div>
 
 

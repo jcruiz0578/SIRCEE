@@ -29,6 +29,8 @@
                     <a class="dropdown-item" href="{{url('ingresos/consultar_secciones')}}">Asignación de Sección</a>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="{{url('calificaciones/llenar')}}">Calificaciones</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="{{url('prosecucion/llenar')}}">Prosecución</a>
                 </div>
             </li>
             <li class="nav-item dropdown">
@@ -40,7 +42,7 @@
                     <a class="dropdown-item" href="#">Asignación Periodo Escolar</a>
                 </div>
             </li>
-           
+
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true"
                     aria-expanded="false"><b>Reportes y Estadisticas</b></a>
@@ -51,7 +53,7 @@
                     <a class="dropdown-item" href="#">Matriclula por Año/Sexo Egresos</a>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="{{url('ingresos/constancia_estudios')}}">Constancia de Estudio</a>
-                   
+
                 </div>
             </li>
         </ul>
