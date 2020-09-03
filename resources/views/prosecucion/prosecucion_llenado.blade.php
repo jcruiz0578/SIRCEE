@@ -10,7 +10,7 @@
 border-radius: 1.2rem 1.2rem 1.2rem 1.2rem;">
 <div class="form-row  font-weight-bold">
 	<div class="form-group col-md-3   ">
-		<label for="">Año de estudio</label>
+		<label for="anoest">Año de estudio</label>
 		<select id="anoest" name="anoest" class="form-control font-weight-bold">
 			<option value="N/A">N/A</option>
 			<option value="T">Todas</option>
@@ -22,7 +22,7 @@ border-radius: 1.2rem 1.2rem 1.2rem 1.2rem;">
 		</select>
 	</div>
 	<div class="form-group col-md-2 ">
-		<label for="">Sección</label>
+		<label for="seccion">Sección</label>
 		<select id="seccion" name="seccion" class="form-control font-weight-bold">
 			<option value="N/A">N/A</option>
 			<option value="Todas">Todas</option>
@@ -40,7 +40,7 @@ border-radius: 1.2rem 1.2rem 1.2rem 1.2rem;">
 	</div>
 
     <div class="form-group col-md-2 ">
-        <label for="">Periodo Escolar</label>
+        <label for="periodoescolar">Periodo Escolar</label>
         <select id="periodoescolar" name="periodoescolar" class="form-control font-weight-bold">
             <option value="N/A">N/A</option>
             <option value="2019-2020">2019-2020</option>
@@ -49,7 +49,7 @@ border-radius: 1.2rem 1.2rem 1.2rem 1.2rem;">
     </div>
 
     <div class="form-group col-md-3   ">
-        <label for="">Año de estudio a inscribir</label>
+        <label for="anoestprosecucion">Año de estudio a inscribir</label>
         <select id="anoestprosecucion" name="anoestprosecucion" class="form-control font-weight-bold">
             <option value="N/A">N/A</option>
 
@@ -66,8 +66,8 @@ border-radius: 1.2rem 1.2rem 1.2rem 1.2rem;">
 		<button type="submit" id="consultar" name="consultar" class="btn btn-primary  form-control font-weight-bold enviar" style="height: 4rem;border-radius: 1.2rem 1.2rem 1.2rem 1.2rem; "><i class="fa fa-list-alt"></i> Consultar</button>
 		</div>
 	</div>
-
-	<table id="tabla1" class="table  table-hover  table-bordered text-center " style="width: 100%; ">
+    <form name="f1">
+    <table id="tabla1" class="table  table-hover  table-bordered text-center " style="width: 100%; ">
 		<thead class="text-white bg-primary">
 			<tr class="font-weight-bold">
 				<th>N°</th>
@@ -90,6 +90,9 @@ border-radius: 1.2rem 1.2rem 1.2rem 1.2rem;">
 
 			</tr>
 		</table>
+        <a href="javascript:seleccionar_todo()">Marcar todos</a> <br>
+        <a href="javascript:deseleccionar_todo()">Desmarcar Todos</a>
+    </form>
 		<div class="form-row  font-weight-bold   justify-content-center  pt-3">
 			<div class="form-group col-sm-4  col-md-3">
 				<button type="submit" id="registrar" name="registrar" class="btn btn-outline-primary  form-control font-weight-bold enviar" style="height: 4rem;  border-radius: 1.2rem 1.2rem 1.2rem 1.2rem;  "><span><i class="fas fa-check"></i> Prosecución</span></button>
@@ -174,17 +177,17 @@ columns: [
 {
 	data: "id_ingreso",
 	name: "id_ingreso"
+
 },
 {
 	data: "cedulaest",
 	name: "cedulaest"
 },
-{
-	data: null,
-	render: function(data, type, full) {
-		return full["apellidosest"] + ", " + full["nombresest"];
-	}
-},
+
+    { data: null, render: function (data) {
+            // Combinar campos
+            return data.estudiante.apellidosest+', '+data.estudiante.nombresest;
+        } },
 
 ]
 });
@@ -235,12 +238,26 @@ t.on( 'order.dt search.dt', function () { t.column(0, {search:'applied', order:'
    });
    alert("Se han inscrito los estudiantes en la modalidad prosecución");
    $("#tabla1").DataTable().ajax.reload();
+
 });
 			/****************************************/
 		});
 	</script>
 
+<script>
+    function seleccionar_todo(){
+        for (i=0;i<document.f1.elements.length;i++)
+            if(document.f1.elements[i].type == "checkbox")
+                document.f1.elements[i].checked=1
+    }
 
+    function deseleccionar_todo(){
+        for (i=0;i<document.f1.elements.length;i++)
+            if(document.f1.elements[i].type == "checkbox")
+                document.f1.elements[i].checked=0
+    }
+
+</script>
 
 
 

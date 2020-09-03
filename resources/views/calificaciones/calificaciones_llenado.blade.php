@@ -46,8 +46,11 @@ border-radius: 1.2rem 1.2rem 1.2rem 1.2rem;">
 		<div class="form-group col-md-2">
 			<label for="">Area</label>
 			<select name="materias" id="materias" class="form-control font-weight-bold">
-			
+				<option value="Seleccionar">Seleccionar</option>
+				
 			</select>
+	
+	
 		</div>
 		<div class="form-group col-md-2">
 			<label for="">Periodo</label>
@@ -229,21 +232,29 @@ t.on( 'order.dt search.dt', function () { t.column(0, {search:'applied', order:'
 	</script>
 
 
-<script>
-	$(document).ready(function () {
-		// Parametros para el combo1
-		$("#anoest").change(function () {
-			$("#anoest option:selected").each(function () {
-				alert($(this).val());
-				elegido = $(this).val();
-				$.post("materias_combox.blade.php", {elegido: elegido}, function (data) {
-					$("#materias").html(data);
-				});
-			});
-		});
-	});
 
-</script>
+
+<script>
+            $(document).ready(function () {
+                // Parametros para el combo1
+                $("#anoest").change(function () {
+					$.ajaxSetup({
+   	headers: {
+   		"X-CSRF-TOKEN": $('meta[name="_token"]').attr("content")
+   	}
+   });
+
+                    $("#anoest option:selected").each(function () {
+                        //alert($(this).val());
+                        elegido = $(this).val();
+                        $.post("/calificacion/comboArea", {elegido: elegido}, function (data) {
+                            $("#materias").html(data);
+                        });
+                    });
+                });
+            });
+
+        </script>
 
 
 

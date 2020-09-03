@@ -2,13 +2,10 @@
 
 namespace App;
 
+
 use Illuminate\Database\Eloquent\Model;
 
-/**
- * App\Ingreso
- *
- * @mixin \Eloquent
- */
+
 class Ingreso extends Model
 {
 	protected $table = 'ingresos';
@@ -19,6 +16,7 @@ class Ingreso extends Model
 	protected $fillable = [
 		'id_ingreso',
 		'periodoescolar',
+        'sw_prosecucion',
 		'cedulaest',
 		'repitienteest',
 		'materiapendiente',

@@ -580,6 +580,58 @@ class IngresosController extends Controller
             ->make(true);
     }
 
+
+public function calificaciones_consulta_notas(Request $request)
+    {
+        // si la peticion es ajax
+        $periodoescolar = $value = session()->get('periodoescolar');
+        $anoest = $request->input('anoest');
+        $seccion = $request->input('seccion');
+     $lapso = $request->input('lapso');
+
+
+
+     
+                $users = Ingreso::join('estudiantes', 'estudiantes.cedulaest', '=', 'ingresos.cedulaest')
+                ->join('calificaciones', 'calificaciones.id_ingreso', '=', 'ingresos.id_ingreso')
+                ->select('calificaciones.*', 'estudiantes.apellidosest', 'estudiantes.nombresest', 'estudiantes.sexoest', 'estudiantes.fnest', 'ingresos.id_ingreso', 'ingresos.periodoescolar', 'ingresos.cedulaest', 'ingresos.anoest', 'ingresos.seccion', 'ingresos.status')
+                ->where('ingresos.periodoescolar', '=', $periodoescolar)
+                 ->where('anoest', '=', $anoest)
+                 ->where('seccion', '=', $seccion)
+                 ->where('lapso', '=', $lapso)
+                ->orderBy('cedulaest', 'desc')
+                 ->orderBy('fnest', 'desc')
+                ->get();
+               
+      
+
+            return Datatables::of($users)
+                ->addColumn('id_ingreso', '<input type="text" id="id_ingreso[]" name="id_ingreso[]" class="form-control  text-center  " value="{{$id_ingreso}}" style="width: 230px; text-align: center"  >')
+               /*  ->addColumn('castellano', '<input type="text" id="castellano[]" name="castellano[]" value="{{$castellano}}" style="width: 30px; text-align: center"  >')
+                ->addColumn('ingles', '<input type="text" id="ingles[]" name="ingles[]" value="{{$ingles}}" style="width: 30px; text-align: center"  >')
+                ->addColumn('matematica', '<input type="text" id="matematica[]" name="matematica[]" value="{{$matematica}}" style="width: 30px; text-align: center"  >')
+                 ->rawColumns(['id_ingreso', 'castellano', 'ingles',  'matematica']) */
+                 ->rawColumns(['id_ingreso'])
+                 ->make(true);
+
+    
+            
+        
+                 
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
     public function calificaciones_registrar(Request $request)
     {
         $periodoescolar = $value = session()->get('periodoescolar');
@@ -654,6 +706,257 @@ class IngresosController extends Controller
 
 
 
+ public function calificaciones_comboArea(Request $request)
+    {
+        $rpta = "";
+
+        if ($_POST ["elegido"] == "1ER AÑO") {
+            $rpta = '
+            <option value="Seleccionar">Seleccionar</option>
+            <option value="castellano">Castellano</option>
+            <option value="ingles">Ingles</option>
+            <option value="matematica">Matematica</option>
+            <option value="ed_fisica">Educación Física</option>
+            <option value="art_patrimonio">Arte y Patrimonio</option>
+            <option value="cs_naturales">Cs Naturales</option>
+            <option value="ghc">GHC</option>
+            <option value="orientacion">Orientación</option>
+            <option value="gcrp">Grupos de Creación, Recreación y Produción</option>		
+                    ';
+        }
+        
+        if ($_POST ["elegido"] == "2DO AÑO") {
+            $rpta = '
+            <option value="Seleccionar">Seleccionar</option>
+            <option value="castellano">Castellano</option>
+            <option value="ingles">Ingles</option>
+            <option value="matematica">Matematica</option>
+            <option value="ed_fisica">Educación Física</option>
+            <option value="art_patrimonio">Arte y Patrimonio</option>
+            <option value="cs_naturales">Cs Naturales</option>
+            <option value="ghc">GHC</option>
+            <option value="orientacion">Orientación</option>
+            <option value="gcrp">Grupos de Creación, Recreación y Produción</option>	
+                    ';
+        }
+        
+        if ($_POST ["elegido"] == "3ER AÑO") {
+            $rpta = '
+            <option value="Seleccionar">Seleccionar</option>
+            <option value="castellano">Castellano</option>
+            <option value="ingles">Ingles</option>
+            <option value="matematica">Matematica</option>
+            <option value="ed_fisica">Educación Física</option>
+            <option value="fisica">Fisica</option>
+            <option value="quimica">Química</option>
+            <option value="bio">Biologia</option>
+            <option value="ghc">GHC</option>
+            <option value="orientacion">Orientación</option>
+            <option value="gcrp">Grupos de Creación, Recreación y Produción</option>	
+                    
+                    ';
+        }
+        
+        
+        if ($_POST ["elegido"] == "4TO AÑO CS") {
+            $rpta = '
+            <option value="Seleccionar">Seleccionar</option>
+            <option value="castellano">Castellano</option>
+            <option value="ingles">Ingles</option>
+            <option value="matematica">Matematica</option>
+            <option value="ed_fisica">Educación Física</option>
+            <option value="fisica">Fisica</option>
+            <option value="quimica">Química</option>
+            <option value="bio">Biologia</option>
+            <option value="ghc">GHC</option>
+            <option value="fsn">FSN</option>
+            <option value="orientacion">Orientación</option>
+            <option value="gcrp">Grupos de Creación, Recreación y Produción</option>	
+                    
+                    ';
+        }
+        
+        if ($_POST ["elegido"] == "5TO AÑO CS") {
+            $rpta = '
+            <option value="Seleccionar">Seleccionar</option>
+            <option value="castellano">Castellano</option>
+            <option value="ingles">Ingles</option>
+            <option value="matematica">Matematica</option>
+            <option value="ed_fisica">Educación Física</option>
+            <option value="fisica">Fisica</option>
+            <option value="quimica">Química</option>
+            <option value="bio">Biologia</option>
+            <option value="cs_tierra">Cs Tierra</option>
+            <option value="ghc">GHC</option>
+            <option value="fsn">FSN</option>
+            <option value="orientacion">Orientación</option>
+            <option value="gcrp">Grupos de Creación, Recreación y Produción</option>	
+                    
+                    ';
+        }
+        
+        
+        
+        
+        echo $rpta;
+    }
+
+
+
+
+
+
+  public function calificacion_definitiva3(Request $request)
+    {
+
+// se asignan las variales que vienen de calificacion_llenado.blade.php
+        $periodoescolar = $value = session()->get('periodoescolar');
+        $id_ingreso = $request->input('id_ingreso');
+        $lapso = $request->input('lapso');
+        $anoest = $request->input('anoest');
+        $seccion = $request->input('seccion');
+
+
+if ($anoest=='1ER AÑO' OR $anoest=='2DO AÑO') {
+    $materias = array('castellano', 'ingles', 'matematica', 'ed_fisica', 'art_patrimonio', 'cs_naturales' , 'ghc', 'orientacion');
+
+}
+if ($anoest=='3ER AÑO') {
+    $materias = array('castellano', 'ingles', 'matematica', 'ed_fisica', 'fisica', 'quimica', 'biologia', 'ghc');
+}
+
+if ($anoest== '4TO AÑO CS') {
+    $materias=array('castellano', 'ingles', 'matematica', 'ed_fisica', 'fisica', 'quimica', 'biologia', 'ghc', 'fsn');
+}
+
+if ($anoest== '5TO AÑO CS'){
+    $materias = array('castellano', 'ingles', 'matematica', 'ed_fisica', 'fisica', 'quimica', 'biologia', 'cs_tierra', 'ghc', 'fsn');
+}
+
+
+        //$materias = array('castellano', 'ingles', 'matematica', 'ed_fisica', 'art_patrimonio', 'cs_naturales' , 'fisica', 'quimica', 'biologia', 'cs_tierra', 'ghc', 'fsn');
+
+
+
+        foreach ($materias as $materia) {
+            for ($i=0; $i<count($id_ingreso) ; $i++) {  // se realiza un ciclo que cuente y recorra la cantidad de id_ingresos
+  
+                $cal = Calificacion::where('id_ingreso', '=', $id_ingreso[$i])
+                  ->where('lapso', '<>', 'D')
+                   ->where('lapso', '<>', 'R')
+                 ->avg($materia);
+                $definitiva = round($cal);
+
+                
+                //se busca ahora si hay registro con nota cuantitativa
+                $comprobacion = Calificacion::where('id_ingreso', '=', $id_ingreso[$i])
+                    ->where('periodoescolar', '=', $periodoescolar)
+                    ->where('lapso', '=', "D")
+                    ->first();
+                    
+                    if ($definitiva >0) {
+                        if (is_null($comprobacion)) {
+                            $calificaciones = new Calificacion(); // si no hay registro con calificaciones  crea el registro  nuevo
+    
+                            $calificaciones->id_ingreso = $id_ingreso[$i];
+                            $calificaciones->periodoescolar = $periodoescolar;
+                            $calificaciones->lapso = 'D';
+                            $calificaciones->$materia= $definitiva;
+                            $calificaciones->save();
+                        } else {
+                            // si existe registro se actualiza las notas
+
+                            $calificaciones =  Calificacion::where('id_ingreso', '=', $id_ingreso[$i])
+                        ->where('periodoescolar', '=', $periodoescolar)
+                        ->where('lapso', '=', 'D')
+                       ->update([$materia => $definitiva]);
+                        }
+                    }
+            }
+        }
+ 
+  //return $calificaciones;
+        return response()->json([
+             'id_ingreso' => $id_ingreso,
+              'anoest' => $anoest,
+             
+            
+        ]);
+
+    
+
+    }
+
+
+
+public function calificacion_definitiva32(Request $request)
+    {
+        // si la peticion es ajax
+        $periodoescolar = $value = session()->get('periodoescolar');
+        $anoest = $request->input('anoest');
+        $seccion = $request->input('seccion');
+     // $lapso = $request->input('lapso');
+
+$id_ingreso = $request->input('id_ingreso');
+        
+
+   //  for($i=0; $i<count($id_ingreso) ; $i++){  // se realiza un ciclo que cuente y recorra la cantidad de id_ingresos
+ for ($i=0; $i<1 ; $i++) {
+    
+    for ($y = 1; $y < 5; $y++) {
+         if ($y == 1) {
+             $lapso = "1";
+         }
+
+         if ($y == 2) {
+             $lapso = "2";
+         }
+
+         if ($y == 3) {
+             $lapso = "3";
+         }
+         if ($y == 4) {
+             $lapso = "D";
+         }
+
+
+ 
+
+     
+         $users = Ingreso::join('estudiantes', 'estudiantes.cedulaest', '=', 'ingresos.cedulaest')
+                ->join('calificaciones', 'calificaciones.id_ingreso', '=', 'ingresos.id_ingreso')
+                ->select('calificaciones.*', 'estudiantes.apellidosest', 'estudiantes.nombresest', 'estudiantes.sexoest', 'estudiantes.fnest', 'ingresos.id_ingreso', 'ingresos.periodoescolar', 'ingresos.cedulaest', 'ingresos.anoest', 'ingresos.seccion', 'ingresos.status')
+                ->where('ingresos.periodoescolar', '=', $periodoescolar)
+                 ->where('anoest', '=', $anoest)
+                 ->where('seccion', '=', $seccion)
+                 ->where('lapso', '=', $lapso)
+                ->orderBy('cedulaest', 'desc')
+                 ->orderBy('fnest', 'desc')
+                ->get();
+ 
+                $total[$i][$y] = $users;
+
+
+
+
+
+
+
+     }
+ }
+
+ 
+
+
+    return $total;
+            
+        
+                 
+
+    }
+
+
+  
 
 
 

@@ -29,6 +29,7 @@
                     <a class="dropdown-item" href="{{url('ingresos/consultar_secciones')}}">Asignación de Sección</a>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="{{url('calificaciones/llenar')}}">Calificaciones</a>
+                     <a class="dropdown-item" href="{{url('calificaciones/consulta_notas')}}">Consultar Calificaciones</a>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="{{url('prosecucion/llenar')}}">Prosecución</a>
                 </div>
@@ -37,7 +38,7 @@
                 <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true"
                     aria-expanded="false"><b>Personal</b></a>
                 <div class="dropdown-menu" aria-labelledby="dropdown01">
-                    <a class="dropdown-item" href="#">Consulta</a>
+                    <a class="dropdown-item" href="{{url('personal/personal')}}">Consulta</a>
                     <a class="dropdown-item" href="#">Operaciones</a>
                     <a class="dropdown-item" href="#">Asignación Periodo Escolar</a>
                 </div>

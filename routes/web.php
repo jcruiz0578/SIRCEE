@@ -80,12 +80,24 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('reportes/constancia_estudio/{cedulaest}', ['as' => 'reportes.constancia_estudio', 'uses' => 'PdfController@constancia_estudio']);
 
 
+Route::view('calificaciones/llenar', 'calificaciones/calificaciones_llenado'); // llama directamente la vista 
+Route::view('calificaciones/consulta_notas', 'calificaciones/calificaciones_consulta_notas'); // llama directamente la vista 
+
+Route::view('personal/personal', 'personal/personal'); // llama directamente la vista
 
 
-Route::view('calificaciones/llenar', 'calificaciones/calificaciones_llenado');
-Route::get('calificaciones_consulta', ['as' => 'calificaciones.consulta', 'uses' => 'IngresosController@calificaciones_consulta']);
+
+Route::get('calificaciones_consulta_notas', ['as' => 'calificaciones.consulta_notas', 'uses' => 'IngresosController@calificaciones_consulta_notas']);
+
 
 Route::get('calificaciones/registrar', ['as' => 'calificaciones.registrar', 'uses' => 'IngresosController@calificaciones_registrar']);
+
+
+Route::post('calificacion/comboArea', ['as' => 'calificacion.comboArea', 'uses' => 'IngresosController@calificaciones_comboArea']);
+
+Route::post('calificacion/definitiva3', ['as' => 'calificacion.definitiva3', 'uses' => 'IngresosController@calificacion_definitiva3']);
+
+
 
 // PROSECUCIÓN
     Route::view('prosecucion/llenar', 'prosecucion/prosecucion_llenado');
